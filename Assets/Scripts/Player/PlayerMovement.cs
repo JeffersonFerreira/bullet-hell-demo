@@ -1,11 +1,19 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+	[Header("Move")]
 	[SerializeField] private float _moveSpeed = 5;
+
+	[Header("Dash")]
+	[SerializeField] private float _dashMultiplier = 0.5f;
+	[SerializeField] private float _dashDuration = 0.25f;
 
 	private Camera _camera;
 	private CharacterController _characterController;
+
+	private bool _isDashing;
 
 	private void Awake()
 	{
@@ -15,8 +23,14 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Update()
 	{
+		if (_isDashing)
+			return;
+
 		UpdateMovement();
 		UpdateRotation();
+
+		if (Input.GetKeyDown(KeyCode.LeftShift))
+			StartCoroutine(DashRoutine());
 	}
 
 	private void UpdateMovement()
@@ -37,5 +51,22 @@ public class PlayerMovement : MonoBehaviour
 		float lookAtAngle = Mathf.Atan2(diff.x, diff.y) * Mathf.Rad2Deg;
 
 		transform.rotation = Quaternion.Euler(new Vector3(0, lookAtAngle, 0));
+	}
+
+	private IEnumerator DashRoutine()
+	{
+		_isDashing = true;
+
+		float t = _dashDuration;
+		Vector3 moveDir = _characterController.velocity.normalized;
+
+		while ((t -= Time.deltaTime) > 0)
+		{
+			_characterController.SimpleMove(moveDir * (_moveSpeed * _dashMultiplier));
+
+			yield return null;
+		}
+
+		_isDashing = false;
 	}
 }
