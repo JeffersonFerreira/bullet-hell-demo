@@ -474,6 +474,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8227303641857059703, guid: cf638f2525fdd9b4cacb09082efecc0f, type: 3}
+      propertyPath: ActiveGun
+      value: 
+      objectReference: {fileID: 8167678465346898191}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: cf638f2525fdd9b4cacb09082efecc0f, type: 3}
+--- !u!114 &8167678465346898191 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4616600962733571483, guid: cf638f2525fdd9b4cacb09082efecc0f, type: 3}
+  m_PrefabInstance: {fileID: 8167678465346898190}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0941824d41734be9831b61a6b0471e96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

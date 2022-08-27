@@ -5,34 +5,36 @@ namespace Guns
 {
 	public class GunBase : MonoBehaviour
 	{
-		[SerializeField] private Bullet _bulletPrefab;
+		[SerializeField] protected Bullet _bulletPrefab;
 
 		[Header("Fire Settings")]
-		[SerializeField] private Transform _spawnPoint;
-		[SerializeField] private float _fireRate;
-		[SerializeField] private float _cooldown;
+		[SerializeField] protected Transform _spawnPoint;
+		[SerializeField] protected float _fireRate;
 
-		private bool _isFiring;
+		public bool IsFiring { get; private set; }
 
-		public void Fire()
+		public bool Fire()
 		{
-			if (_isFiring)
-				return;
+			if (IsFiring)
+				return false;
 
 			StartCoroutine(FireRoutine());
+			return true;
 		}
 
 		private IEnumerator FireRoutine()
 		{
-			_isFiring = true;
+			IsFiring = true;
 
 			FireOnce();
-			yield return new WaitForSeconds(_cooldown);
 
-			_isFiring = false;
+			if (_fireRate > 0)
+				yield return new WaitForSeconds(1f / _fireRate);
+
+			IsFiring = false;
 		}
 
-		private void FireOnce()
+		protected virtual void FireOnce()
 		{
 			Bullet bullet = Instantiate(_bulletPrefab, _spawnPoint.position, transform.rotation);
 
