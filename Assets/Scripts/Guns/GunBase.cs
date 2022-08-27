@@ -13,6 +13,11 @@ namespace Guns
 
 		public bool IsFiring { get; private set; }
 
+		private void OnDisable()
+		{
+			IsFiring = false;
+		}
+
 		public bool Fire()
 		{
 			if (IsFiring)
