@@ -21,7 +21,6 @@ namespace Guns
 		}
 	}
 
-
 	// For debugging
 	[Serializable]
 	public struct BulletData
@@ -32,12 +31,5 @@ namespace Guns
 		public float Damage;
 		public float Timeout;
 		public float Speed;
-	}
-
-	public enum BulletType
-	{
-		Default,
-		Light,
-		Sniper
 	}
 }
