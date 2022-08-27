@@ -10,10 +10,17 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] private float _dashMultiplier = 0.5f;
 	[SerializeField] private float _dashDuration = 0.25f;
 
+	[Header("Slow Effect")]
+	[Range(0, 1)]
+	[SerializeField] private float _maxSlowAmount = 0.7f;
+	[SerializeField] private float _slowDuration = 2f;
+
 	private Camera _camera;
 	private CharacterController _characterController;
 
 	private bool _isDashing;
+	private float _slowAmount;
+	private float _lastSlowTime;
 
 	private void Awake()
 	{
@@ -23,14 +30,31 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Update()
 	{
-		if (_isDashing)
-			return;
+		// Placeholder
+		if (Input.GetKeyDown(KeyCode.RightBracket))
+			ApplySlowness();
 
-		UpdateMovement();
-		UpdateRotation();
+		if (!_isDashing)
+		{
+			UpdateMovement();
+			UpdateRotation();
+			UpdateSlowDecay();
 
-		if (Input.GetKeyDown(KeyCode.LeftShift))
-			StartCoroutine(DashRoutine());
+			if (Input.GetKeyDown(KeyCode.LeftShift))
+				StartCoroutine(DashRoutine());
+		}
+	}
+
+	public void ApplySlowness(float effectValue = 0.2f)
+	{
+		_lastSlowTime = Time.time;
+		_slowAmount = Mathf.Min(_maxSlowAmount, _slowAmount + effectValue);
+	}
+
+	private void UpdateSlowDecay()
+	{
+		if (_slowAmount > 0 && Time.time > _lastSlowTime + _slowDuration)
+			_slowAmount = Mathf.Max(0, _slowAmount - Time.deltaTime);
 	}
 
 	private void UpdateMovement()
@@ -39,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
 		var y = Input.GetAxisRaw("Vertical");
 
 		var moveDir = new Vector3(x, 0, y);
-		_characterController.SimpleMove(moveDir * _moveSpeed);
+		_characterController.SimpleMove(moveDir * (_moveSpeed * (1 - _slowAmount)));
 	}
 
 	private void UpdateRotation()
