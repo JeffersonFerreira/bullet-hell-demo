@@ -98,6 +98,8 @@ GameObject:
   - component: {fileID: 459477085400505466}
   - component: {fileID: 6208205842100240382}
   - component: {fileID: 8227303641857059703}
+  - component: {fileID: 613619378920009949}
+  - component: {fileID: 4352527256708291622}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -121,7 +123,7 @@ Transform:
   - {fileID: 8167678464895292432}
   - {fileID: 8412803898199698310}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8167678464981297312
 MeshFilter:
@@ -220,6 +222,8 @@ MonoBehaviour:
   _moveSpeed: 10
   _dashMultiplier: 4
   _dashDuration: 0.125
+  _maxSlowAmount: 0.7
+  _slowDuration: 2
 --- !u!114 &8227303641857059703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +239,32 @@ MonoBehaviour:
   _guns:
   - {fileID: 8785739973733806472}
   - {fileID: 4616600962733571483}
+--- !u!114 &613619378920009949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8167678464981297317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8529c0e533734045a801cdcefcdcce40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _initialHealth: 3
+  _invulnerabilityDuration: 0.2
+--- !u!114 &4352527256708291622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8167678464981297317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2020c9a788e4f4aaef957446aa3f7b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1303755828521109368
 PrefabInstance:
   m_ObjectHideFlags: 0
