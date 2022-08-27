@@ -19,13 +19,9 @@ namespace Player
 		{
 			if (Input.GetMouseButton(0))
 				ActiveGun.Fire();
-
-			// Placeholder
-			if (Input.GetKeyDown(KeyCode.LeftBracket))
-				NextGun();
 		}
 
-		private void NextGun()
+		public void NextGun()
 		{
 			foreach (GunBase g in _guns)
 				g.gameObject.SetActive(false);

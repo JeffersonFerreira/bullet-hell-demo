@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -15,6 +16,9 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] private float _maxSlowAmount = 0.7f;
 	[SerializeField] private float _slowDuration = 2f;
 
+	public event Action OnDash;
+	public event Action OnSlowed;
+
 	private Camera _camera;
 	private CharacterController _characterController;
 
@@ -30,10 +34,6 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Update()
 	{
-		// Placeholder
-		if (Input.GetKeyDown(KeyCode.RightBracket))
-			ApplySlowness();
-
 		if (!_isDashing)
 		{
 			UpdateMovement();
@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
 
 	public void ApplySlowness(float effectValue = 0.2f)
 	{
+		OnSlowed?.Invoke();
 		_lastSlowTime = Time.time;
 		_slowAmount = Mathf.Min(_maxSlowAmount, _slowAmount + effectValue);
 	}
@@ -81,13 +82,13 @@ public class PlayerMovement : MonoBehaviour
 	{
 		_isDashing = true;
 
+		OnDash?.Invoke();
 		float t = _dashDuration;
 		Vector3 moveDir = _characterController.velocity.normalized;
 
 		while ((t -= Time.deltaTime) > 0)
 		{
 			_characterController.SimpleMove(moveDir * (_moveSpeed * _dashMultiplier));
-
 			yield return null;
 		}
 
