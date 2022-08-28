@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
 			UpdateRotation();
 			UpdateSlowDecay();
 
-			if (Input.GetKeyDown(KeyCode.LeftShift))
+			if (Input.GetKeyDown(KeyCode.Space))
 				StartCoroutine(DashRoutine());
 		}
 	}

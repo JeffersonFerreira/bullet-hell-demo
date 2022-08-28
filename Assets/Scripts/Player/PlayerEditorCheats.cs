@@ -17,7 +17,7 @@ namespace Player
 
 		private void Update()
 		{
-			if (Input.GetKeyDown(KeyCode.LeftBracket))
+			if (Input.GetMouseButtonDown(1))
 				_gunController.NextGun();
 
 			if (Input.GetKeyDown(KeyCode.RightBracket))
