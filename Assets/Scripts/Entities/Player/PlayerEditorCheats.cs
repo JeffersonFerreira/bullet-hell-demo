@@ -4,13 +4,13 @@ namespace Player
 {
 	public class PlayerEditorCheats : MonoBehaviour
 	{
-		private PlayerHealth _health;
+		private BaseHealthSystem _healthSystem;
 		private PlayerMovement _movement;
 		private PlayerGunController _gunController;
 
 		private void Awake()
 		{
-			_health = GetComponent<PlayerHealth>();
+			_healthSystem = GetComponent<BaseHealthSystem>();
 			_movement = GetComponent<PlayerMovement>();
 			_gunController = GetComponent<PlayerGunController>();
 		}
@@ -24,7 +24,7 @@ namespace Player
 				_movement.ApplySlowness();
 
 			if (Input.GetKeyDown(KeyCode.Equals))
-				_health.TakeDamage();
+				_healthSystem.TakeDamage();
 		}
 	}
 }

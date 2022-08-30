@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Player
 {
-	public class PlayerHealth : MonoBehaviour
+	public class BaseHealthSystem : MonoBehaviour
 	{
 		[SerializeField] private int _initialHealth = 3;
 		[SerializeField] private float _invulnerabilityDuration = 0.2f;
