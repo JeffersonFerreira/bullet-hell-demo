@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
 	[Header("Dash")]
 	[SerializeField] private float _dashMultiplier = 0.5f;
 	[SerializeField] private float _dashDuration = 0.25f;
+	[SerializeField] private float _dashCooldown = 0.5f;
 
 	[Header("Slow Effect")]
 	[Range(0, 1)]
@@ -25,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
 	private bool _isDashing;
 	private float _slowAmount;
 	private float _lastSlowTime;
+	private float _lastDashTime;
 
 	private void Awake()
 	{
@@ -34,13 +36,14 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Update()
 	{
+		UpdateRotation();
+		UpdateSlowEffectDecay();
+
 		if (!_isDashing)
 		{
 			UpdateMovement();
-			UpdateRotation();
-			UpdateSlowDecay();
 
-			if (Input.GetKeyDown(KeyCode.Space))
+			if (Input.GetKeyDown(KeyCode.Space) && Time.time > _lastDashTime + _dashCooldown)
 				StartCoroutine(DashRoutine());
 		}
 	}
@@ -52,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
 		_slowAmount = Mathf.Min(_maxSlowAmount, _slowAmount + effectValue);
 	}
 
-	private void UpdateSlowDecay()
+	private void UpdateSlowEffectDecay()
 	{
 		if (_slowAmount > 0 && Time.time > _lastSlowTime + _slowDuration)
 			_slowAmount = Mathf.Max(0, _slowAmount - Time.deltaTime);
@@ -92,6 +95,7 @@ public class PlayerMovement : MonoBehaviour
 			yield return null;
 		}
 
+		_lastDashTime = Time.time;
 		_isDashing = false;
 	}
 }
