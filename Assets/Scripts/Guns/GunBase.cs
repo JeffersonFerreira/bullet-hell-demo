@@ -11,6 +11,9 @@ namespace Guns
 		[SerializeField] protected Transform _spawnPoint;
 		[SerializeField] protected float _fireRate;
 
+		[SerializeField] private float _fireCooldown = -1;
+
+		public bool IsCoolingDown { get; private set; }
 		public bool IsFiring { get; private set; }
 
 		private void OnDisable()
@@ -20,11 +23,16 @@ namespace Guns
 
 		public bool Fire()
 		{
-			if (IsFiring)
+			if (!CanFire())
 				return false;
 
 			StartCoroutine(FireRoutine());
 			return true;
+		}
+
+		public bool CanFire()
+		{
+			return !IsFiring && !IsCoolingDown;
 		}
 
 		private IEnumerator FireRoutine()
@@ -35,6 +43,13 @@ namespace Guns
 
 			if (_fireRate > 0)
 				yield return new WaitForSeconds(1f / _fireRate);
+
+			if (_fireCooldown > 0)
+			{
+				IsCoolingDown = true;
+				yield return new WaitForSeconds(_fireCooldown);
+				IsCoolingDown = false;
+			}
 
 			IsFiring = false;
 		}

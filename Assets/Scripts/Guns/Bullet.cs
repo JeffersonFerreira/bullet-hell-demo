@@ -1,4 +1,5 @@
 ﻿using System;
+using Entity;
 using UnityEngine;
 
 namespace Guns
@@ -6,6 +7,7 @@ namespace Guns
 	public class Bullet : MonoBehaviour
 	{
 		private Rigidbody _rigidbody;
+		private BulletData _data;
 
 		private void Awake()
 		{
@@ -14,10 +16,23 @@ namespace Guns
 
 		public void Apply(BulletData data)
 		{
-			Vector3 dir = transform.forward;
-			_rigidbody.velocity = dir * data.Speed;
+			_data = data;
+			_rigidbody.velocity = transform.forward * data.Speed;
 
-			Destroy(gameObject, data.Timeout);
+			Invoke(nameof(Dispose), data.Timeout);
+		}
+
+		private void OnCollisionEnter(Collision collision)
+		{
+			if (collision.gameObject.TryGetComponent(out BaseHealthSystem healthSystem))
+				healthSystem.TakeDamage();
+
+			Dispose();
+		}
+
+		private void Dispose()
+		{
+			Destroy(gameObject);
 		}
 	}
 
@@ -28,7 +43,6 @@ namespace Guns
 		public int SourceInstanceID;
 
 		[Space]
-		public float Damage;
 		public float Timeout;
 		public float Speed;
 	}

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Player
+namespace Entity.Player
 {
 	public class PlayerEditorCheats : MonoBehaviour
 	{

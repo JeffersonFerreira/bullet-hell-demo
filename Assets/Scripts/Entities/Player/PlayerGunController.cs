@@ -1,7 +1,7 @@
 ﻿using Guns;
 using UnityEngine;
 
-namespace Player
+namespace Entity.Player
 {
 	public class PlayerGunController : MonoBehaviour
 	{

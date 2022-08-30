@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Player
+namespace Entity
 {
 	public class BaseHealthSystem : MonoBehaviour
 	{
