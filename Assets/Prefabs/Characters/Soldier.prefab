@@ -221,6 +221,8 @@ MonoBehaviour:
   _movementProps:
     ClosestDistance: 2
     FarestDistance: 5
+  _knockBackDuration: 0.2
+  _knockBackForce: 0.01
 --- !u!114 &210204829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,8 +294,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7780787431099528944, guid: 5a72ca1f513e70940a2016a6b98f58e7, type: 3}
+      propertyPath: _roundsDelay
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7780787431099528944, guid: 5a72ca1f513e70940a2016a6b98f58e7, type: 3}
       propertyPath: _fireCooldown
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7780787431099528944, guid: 5a72ca1f513e70940a2016a6b98f58e7, type: 3}
+      propertyPath: _roundsPerShot
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9150136460442176324, guid: 5a72ca1f513e70940a2016a6b98f58e7, type: 3}
       propertyPath: m_Name

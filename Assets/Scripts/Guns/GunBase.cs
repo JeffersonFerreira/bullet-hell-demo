@@ -11,6 +11,11 @@ namespace Guns
 		[SerializeField] protected Transform _spawnPoint;
 		[SerializeField] protected float _fireRate;
 
+		[Min(1)]
+		[SerializeField] private int _roundsPerShot = 1;
+		[Range(0, 1)]
+		[SerializeField] private float _roundsDelay = 0.2f;
+
 		[SerializeField] private float _fireCooldown = -1;
 
 		public bool IsCoolingDown { get; private set; }
@@ -39,7 +44,13 @@ namespace Guns
 		{
 			IsFiring = true;
 
-			FireOnce();
+			for (var i = 0; i < _roundsPerShot; i++)
+			{
+				FireOnce();
+
+				if (_roundsPerShot > 1)
+					yield return new WaitForSeconds(_roundsDelay);
+			}
 
 			if (_fireRate > 0)
 				yield return new WaitForSeconds(1f / _fireRate);
