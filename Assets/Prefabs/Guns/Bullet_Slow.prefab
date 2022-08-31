@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: _hitEffect
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3328115434489885237, guid: 2dda44bfbc8c4b24fb5e0076fe483b48, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 310c59ee61e6ce04eaabe3611dea8856, type: 2}
     - target: {fileID: 4927864049312218060, guid: 2dda44bfbc8c4b24fb5e0076fe483b48, type: 3}
       propertyPath: m_Name
       value: Bullet_Slow
@@ -59,6 +63,18 @@ PrefabInstance:
     - target: {fileID: 6620435183656931742, guid: 2dda44bfbc8c4b24fb5e0076fe483b48, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9110625141771025389, guid: 2dda44bfbc8c4b24fb5e0076fe483b48, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 0.754717
+      objectReference: {fileID: 0}
+    - target: {fileID: 9110625141771025389, guid: 2dda44bfbc8c4b24fb5e0076fe483b48, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 0.6250275
+      objectReference: {fileID: 0}
+    - target: {fileID: 9110625141771025389, guid: 2dda44bfbc8c4b24fb5e0076fe483b48, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 0.2242791
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
