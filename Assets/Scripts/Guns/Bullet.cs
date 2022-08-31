@@ -6,6 +6,8 @@ namespace Guns
 {
 	public class Bullet : MonoBehaviour
 	{
+		[SerializeField] private BulletHitEffect _hitEffect;
+
 		private Rigidbody _rigidbody;
 		private BulletData _data;
 
@@ -24,8 +26,25 @@ namespace Guns
 
 		private void OnCollisionEnter(Collision collision)
 		{
-			if (collision.gameObject.TryGetComponent(out BaseHealthSystem healthSystem))
-				healthSystem.TakeDamage();
+			switch (_hitEffect)
+			{
+				case BulletHitEffect.Damage:
+				{
+					if (collision.gameObject.TryGetComponent(out BaseHealthSystem healthSystem))
+						healthSystem.TakeDamage();
+
+					break;
+				}
+				case BulletHitEffect.Slowness:
+				{
+					if (collision.gameObject.TryGetComponent(out PlayerMovement movement))
+						movement.ApplySlowness();
+
+					break;
+				}
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
 
 			Dispose();
 		}
@@ -34,6 +53,12 @@ namespace Guns
 		{
 			Destroy(gameObject);
 		}
+	}
+
+	public enum BulletHitEffect
+	{
+		Damage,
+		Slowness
 	}
 
 	// For debugging

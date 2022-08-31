@@ -65,8 +65,6 @@ namespace Entity.Enemy
 
 			UnityEditor.Handles.color = Color.red;
 			UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, _movementProps.FarestDistance);
-
-			UnityEditor.Handles.color = Color.white;
 #endif
 		}
 	}
