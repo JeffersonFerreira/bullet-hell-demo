@@ -4,29 +4,25 @@ using System.Collections.Generic;
 using Guns;
 using JetBrains.Annotations;
 using UnityEngine;
+using Utility;
 
 namespace Entity.Enemy
 {
-	public delegate Coroutine CoroutineWrapper(IEnumerator enumerator);
-
 	public class BasicStateMachine
 	{
 		private readonly SharedData _data;
-		private readonly CoroutineWrapper _coroutineWrapper;
 		private readonly Dictionary<Type, StateBase> _stateMap = new();
-
 		private StateBase _currentState;
 
-		public BasicStateMachine(SharedData data, CoroutineWrapper wrapper)
+		public BasicStateMachine(SharedData data)
 		{
 			_data = data;
-			_coroutineWrapper = wrapper;
 		}
 
 		public void AddState<TState>(object props = null) where TState : StateBase, new()
 		{
 			var state = new TState();
-			state.Configure(this, _coroutineWrapper, _data, props);
+			state.Configure(this, _data, props);
 
 			_stateMap[typeof(TState)] = state;
 		}
@@ -34,9 +30,17 @@ namespace Entity.Enemy
 		public void AddState<TState, TProps>(TProps props) where TState : StateBase<TProps>, new()
 		{
 			var state = new TState();
-			state.Configure(this, _coroutineWrapper, _data, props);
+			state.Configure(this, _data, props);
 
 			_stateMap[typeof(TState)] = state;
+		}
+
+		public void SetStateWithProps<TState, TProps>(TProps props) where TState: StateBase<TProps>
+		{
+			StateBase state = _stateMap[typeof(TState)];
+			state.SetProps(props);
+
+			SetState<TState>();
 		}
 
 		public void SetState<TState>() where TState : StateBase
@@ -81,6 +85,11 @@ namespace Entity.Enemy
 			get => (TProps) base.Props;
 			set => base.Props = value;
 		}
+
+		public void SetProps(TProps props)
+		{
+			base.SetProps(props);
+		}
 	}
 
 	public abstract class StateBase
@@ -89,7 +98,7 @@ namespace Entity.Enemy
 		protected object Props { get; set; }
 
 		private BasicStateMachine _stateMachine;
-		private CoroutineWrapper _coroutineWrapper;
+		private ICoroutineHelper _coroutineHelper => CoroutineHelper.Instance;
 
 		public virtual void Tick()
 		{
@@ -108,17 +117,24 @@ namespace Entity.Enemy
 			_stateMachine.SetState<TNext>();
 		}
 
-		public void Configure(BasicStateMachine stateMachine, CoroutineWrapper coroutineWrapper, SharedData data, object props)
+		public void Configure(BasicStateMachine stateMachine, SharedData data, object props)
 		{
 			Data = data;
-			Props = props;
 			_stateMachine = stateMachine;
-			_coroutineWrapper = coroutineWrapper;
+
+			SetProps(props);
 		}
+
+		public void SetProps(object props)
+		{
+			this.Props = props;
+		}
+
+		protected void StopCoroutine(Coroutine coroutine) => _coroutineHelper.StopCoroutine(coroutine);
 
 		protected Coroutine StartCoroutine(IEnumerator coroutine)
 		{
-			return _coroutineWrapper.Invoke(coroutine);
+			return _coroutineHelper.StartCoroutine(coroutine);
 		}
 	}
 }

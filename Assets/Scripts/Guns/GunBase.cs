@@ -61,6 +61,7 @@ namespace Guns
 			bullet.Apply(new BulletData {
 				Speed = 20,
 				Timeout = 10,
+				Origin = _spawnPoint.position,
 				SourceInstanceID = gameObject.GetInstanceID()
 			});
 		}

@@ -8,8 +8,9 @@ namespace Guns
 	{
 		[SerializeField] private BulletHitEffect _hitEffect;
 
+		public BulletData Data { get; private set; }
+
 		private Rigidbody _rigidbody;
-		private BulletData _data;
 
 		private void Awake()
 		{
@@ -18,7 +19,7 @@ namespace Guns
 
 		public void Apply(BulletData data)
 		{
-			_data = data;
+			Data = data;
 			_rigidbody.velocity = transform.forward * data.Speed;
 
 			Invoke(nameof(Dispose), data.Timeout);
@@ -70,5 +71,7 @@ namespace Guns
 		[Space]
 		public float Timeout;
 		public float Speed;
+
+		public Vector3 Origin;
 	}
 }
