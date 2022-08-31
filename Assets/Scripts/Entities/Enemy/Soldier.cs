@@ -10,6 +10,7 @@ namespace Entity.Enemy
 		[Range(0, 10)]
 		[SerializeField] private float _moveSpeedVariationRange;
 		[SerializeField] private float _moveSpeedBase = 5;
+		[SerializeField] private MovementState.StateProps _movementProps = new();
 
 		private BaseHealthSystem _healthSystem;
 		private CharacterController _characterController;
@@ -17,7 +18,7 @@ namespace Entity.Enemy
 		private GunBase _weapon;
 		private Transform _playerTransform;
 		private float _moveSpeedWithVariation;
-		private SoldierStateMachine _stateMachine;
+		private BasicStateMachine _stateMachine;
 
 		private void Awake()
 		{
@@ -31,6 +32,11 @@ namespace Entity.Enemy
 				_moveSpeedBase + Random.Range(-_moveSpeedVariationRange, _moveSpeedVariationRange)
 			);
 
+			SetupStateMachine();
+		}
+
+		private void SetupStateMachine()
+		{
 			var sharedData = new SharedData {
 				Transform = transform,
 				PlayerTransform = _playerTransform,
@@ -39,21 +45,29 @@ namespace Entity.Enemy
 				MoveSpeed = _moveSpeedWithVariation
 			};
 
-			_stateMachine = new SoldierStateMachine(sharedData, StartCoroutine);
+			// Setup state machine behaviors
+			_stateMachine = new BasicStateMachine(sharedData, StartCoroutine);
+			_stateMachine.AddState<AttackState>();
+			_stateMachine.AddState<MovementState, MovementState.StateProps>(_movementProps);
+			_stateMachine.SetState<MovementState>();
 		}
 
 		private void Update()
 		{
-			// UpdateMovement();
-
 			_stateMachine.Tick();
-
 		}
 
-		private void UpdateMovement()
+		private void OnDrawGizmosSelected()
 		{
-			Vector3 playerDir = (_playerTransform.position - transform.position).normalized;
-			_characterController.SimpleMove(playerDir * _moveSpeedWithVariation);
+#if UNITY_EDITOR
+			UnityEditor.Handles.color = Color.green;
+			UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, _movementProps.ClosestDistance);
+
+			UnityEditor.Handles.color = Color.red;
+			UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, _movementProps.FarestDistance);
+
+			UnityEditor.Handles.color = Color.white;
+#endif
 		}
 	}
 }

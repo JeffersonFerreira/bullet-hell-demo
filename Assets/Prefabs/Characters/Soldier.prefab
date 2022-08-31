@@ -96,6 +96,8 @@ GameObject:
   - component: {fileID: 8774359469169925546}
   - component: {fileID: 8774359469169925547}
   - component: {fileID: 1080238019918604659}
+  - component: {fileID: 210204828}
+  - component: {fileID: 210204829}
   m_Layer: 0
   m_Name: Soldier
   m_TagString: Untagged
@@ -110,7 +112,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8774359469169925548}
-  m_LocalRotation: {x: -0, y: 0.86602443, z: -0, w: 0.5000018}
+  m_LocalRotation: {x: 0, y: 0.86602545, z: 0, w: 0.49999994}
   m_LocalPosition: {x: -13.026387, y: 1, z: 10.6621065}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -118,7 +120,7 @@ Transform:
   - {fileID: 8774359469082017267}
   - {fileID: 4182611491923460339}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 120, z: 0}
 --- !u!33 &8774359469169925545
 MeshFilter:
@@ -202,6 +204,37 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &210204828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8774359469169925548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30ad2386644b4690b38f63fc1e984286, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveSpeedVariationRange: 1
+  _moveSpeedBase: 0.5
+  _movementProps:
+    ClosestDistance: 2
+    FarestDistance: 5
+--- !u!114 &210204829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8774359469169925548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8529c0e533734045a801cdcefcdcce40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _initialHealth: 3
+  _invulnerabilityDuration: 0.2
 --- !u!1001 &6691233505365388301
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -257,6 +290,10 @@ PrefabInstance:
     - target: {fileID: 7780787431099528944, guid: 5a72ca1f513e70940a2016a6b98f58e7, type: 3}
       propertyPath: _fireRate
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7780787431099528944, guid: 5a72ca1f513e70940a2016a6b98f58e7, type: 3}
+      propertyPath: _fireCooldown
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9150136460442176324, guid: 5a72ca1f513e70940a2016a6b98f58e7, type: 3}
       propertyPath: m_Name

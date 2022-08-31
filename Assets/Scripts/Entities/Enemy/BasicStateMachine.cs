@@ -9,7 +9,7 @@ namespace Entity.Enemy
 {
 	public delegate Coroutine CoroutineWrapper(IEnumerator enumerator);
 
-	public class SoldierStateMachine
+	public class BasicStateMachine
 	{
 		private readonly SharedData _data;
 		private readonly CoroutineWrapper _coroutineWrapper;
@@ -17,21 +17,24 @@ namespace Entity.Enemy
 
 		private StateBase _currentState;
 
-		public SoldierStateMachine(SharedData data, CoroutineWrapper wrapper)
+		public BasicStateMachine(SharedData data, CoroutineWrapper wrapper)
 		{
 			_data = data;
 			_coroutineWrapper = wrapper;
-
-			AddState<MovementState>();
-			AddState<AttackState>();
-
-			SetState<MovementState>();
 		}
 
-		private void AddState<TState>() where TState : StateBase, new()
+		public void AddState<TState>(object props = null) where TState : StateBase, new()
 		{
 			var state = new TState();
-			state.Configure(this, _data, _coroutineWrapper);
+			state.Configure(this, _coroutineWrapper, _data, props);
+
+			_stateMap[typeof(TState)] = state;
+		}
+
+		public void AddState<TState, TProps>(TProps props) where TState : StateBase<TProps>, new()
+		{
+			var state = new TState();
+			state.Configure(this, _coroutineWrapper, _data, props);
 
 			_stateMap[typeof(TState)] = state;
 		}
@@ -54,7 +57,7 @@ namespace Entity.Enemy
 
 		public void Tick()
 		{
-			_currentState.Tick();
+			_currentState?.Tick();
 		}
 	}
 
@@ -71,11 +74,21 @@ namespace Entity.Enemy
 		public Transform PlayerTransform;
 	}
 
-
-	public class StateBase
+	public abstract class StateBase<TProps> : StateBase
 	{
-		protected SharedData Data;
-		private SoldierStateMachine _stateMachine;
+		protected new TProps Props
+		{
+			get => (TProps) base.Props;
+			set => base.Props = value;
+		}
+	}
+
+	public abstract class StateBase
+	{
+		protected SharedData Data { get; set; }
+		protected object Props { get; set; }
+
+		private BasicStateMachine _stateMachine;
 		private CoroutineWrapper _coroutineWrapper;
 
 		public virtual void Tick()
@@ -95,9 +108,10 @@ namespace Entity.Enemy
 			_stateMachine.SetState<TNext>();
 		}
 
-		public void Configure(SoldierStateMachine stateMachine, SharedData data, CoroutineWrapper coroutineWrapper)
+		public void Configure(BasicStateMachine stateMachine, CoroutineWrapper coroutineWrapper, SharedData data, object props)
 		{
 			Data = data;
+			Props = props;
 			_stateMachine = stateMachine;
 			_coroutineWrapper = coroutineWrapper;
 		}

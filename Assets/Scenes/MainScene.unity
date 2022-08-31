@@ -123,39 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &210204822 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8774359469169925548, guid: 438d34e9aec343d44a06ca0c4caff326, type: 3}
-  m_PrefabInstance: {fileID: 1180722799842635387}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &210204828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 210204822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30ad2386644b4690b38f63fc1e984286, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _moveSpeedVariationRange: 1
-  _moveSpeedBase: 0.5
---- !u!114 &210204829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 210204822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8529c0e533734045a801cdcefcdcce40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _initialHealth: 3
-  _invulnerabilityDuration: 0.2
 --- !u!4 &374170031 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8167678464981297313, guid: cf638f2525fdd9b4cacb09082efecc0f, type: 3}
@@ -255,39 +222,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &754659202 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 522718059284203861, guid: 07f3fd63415b2084386dea7c947da1bb, type: 3}
-  m_PrefabInstance: {fileID: 522718060249263167}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &754659208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 754659202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30ad2386644b4690b38f63fc1e984286, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _moveSpeedVariationRange: 1
-  _moveSpeedBase: 0.5
---- !u!114 &754659209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 754659202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8529c0e533734045a801cdcefcdcce40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _initialHealth: 3
-  _invulnerabilityDuration: 0.2
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -551,10 +485,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3974111774151285501, guid: 438d34e9aec343d44a06ca0c4caff326, type: 3}
-      propertyPath: _fireCooldown
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 8774359469169925544, guid: 438d34e9aec343d44a06ca0c4caff326, type: 3}
       propertyPath: m_RootOrder
       value: 4
