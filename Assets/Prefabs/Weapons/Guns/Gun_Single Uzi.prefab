@@ -46,9 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d78a595d8ee540b48a1a9b39536d86e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletPrefab: {fileID: 8641669074480322286, guid: 434bf508acfbc3247abc82da49710ae5, type: 3}
+  _bulletPrefab: {fileID: 455510776048037210, guid: 2dda44bfbc8c4b24fb5e0076fe483b48, type: 3}
   _spawnPoint: {fileID: 7293853975229067044}
   _fireRate: -1
+  _roundsPerShot: 1
+  _roundsDelay: 0.2
+  _fireCooldown: -1
 --- !u!1 &3638700591406701894
 GameObject:
   m_ObjectHideFlags: 0
