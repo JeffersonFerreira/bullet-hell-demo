@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Entity.Enemy
 {
-	public class MovementState : StateBase<MovementState.StateProps>
+	public class MovementState : StateBase<MovementProps>
 	{
 		public override void Tick()
 		{
@@ -31,12 +31,12 @@ namespace Entity.Enemy
 			// Stay still
 			return 0;
 		}
+	}
 
-		[Serializable]
-		public class StateProps
-		{
-			public float ClosestDistance = 1;
-			public float FarestDistance = 5;
-		}
+	[Serializable]
+	public class MovementProps
+	{
+		public float ClosestDistance = 1;
+		public float FarestDistance = 5;
 	}
 }

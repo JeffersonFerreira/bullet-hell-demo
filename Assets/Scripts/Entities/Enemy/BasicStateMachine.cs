@@ -13,16 +13,19 @@ namespace Entity.Enemy
 		private readonly SharedData _data;
 		private readonly Dictionary<Type, StateBase> _stateMap = new();
 		private StateBase _currentState;
+		private ICoroutineHelper _coroutineHelper;
 
-		public BasicStateMachine(SharedData data)
+		public BasicStateMachine(SharedData data, MonoBehaviour coroutineWrapper)
 		{
 			_data = data;
+			_coroutineHelper = new CoroutineHelper(coroutineWrapper);
 		}
 
 		public void AddState<TState>(object props = null) where TState : StateBase, new()
 		{
 			var state = new TState();
-			state.Configure(this, _data, props);
+			state.Configure(this, _data, _coroutineHelper);
+			state.SetProps(props);
 
 			_stateMap[typeof(TState)] = state;
 		}
@@ -30,7 +33,8 @@ namespace Entity.Enemy
 		public void AddState<TState, TProps>(TProps props) where TState : StateBase<TProps>, new()
 		{
 			var state = new TState();
-			state.Configure(this, _data, props);
+			state.Configure(this, _data, _coroutineHelper);
+			state.SetProps(props);
 
 			_stateMap[typeof(TState)] = state;
 		}
@@ -98,7 +102,7 @@ namespace Entity.Enemy
 		protected object Props { get; set; }
 
 		private BasicStateMachine _stateMachine;
-		private ICoroutineHelper _coroutineHelper => CoroutineHelper.Instance;
+		private ICoroutineHelper _coroutineHelper;
 
 		public virtual void Tick()
 		{
@@ -117,12 +121,11 @@ namespace Entity.Enemy
 			_stateMachine.SetState<TNext>();
 		}
 
-		public void Configure(BasicStateMachine stateMachine, SharedData data, object props)
+		public void Configure(BasicStateMachine stateMachine, SharedData data, ICoroutineHelper coroutineHelper)
 		{
 			Data = data;
 			_stateMachine = stateMachine;
-
-			SetProps(props);
+			_coroutineHelper = coroutineHelper;
 		}
 
 		public void SetProps(object props)

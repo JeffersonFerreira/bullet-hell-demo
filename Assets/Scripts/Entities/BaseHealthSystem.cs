@@ -1,14 +1,15 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Entity
 {
+	public delegate void OnTakeDamage(int heathPointsLeft);
+
 	public class BaseHealthSystem : MonoBehaviour
 	{
 		[SerializeField] private int _initialHealth = 3;
 		[SerializeField] private float _invulnerabilityDuration = 0.2f;
 
-		public event Action<int> OnTakeDamage;
+		public event OnTakeDamage OnTakeDamage;
 
 		public int Health { get; private set; }
 

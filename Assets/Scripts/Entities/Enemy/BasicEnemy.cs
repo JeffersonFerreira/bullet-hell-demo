@@ -12,7 +12,7 @@ namespace Entity.Enemy
 		[Range(0, 10)]
 		[SerializeField] private float _moveSpeedVariationRange;
 		[SerializeField] private float _moveSpeedBase = 5;
-		[SerializeField] private MovementState.StateProps _movementProps = new();
+		[SerializeField] private MovementProps _movementProps = new();
 
 		[Header("OnHit KnockBack")]
 		[SerializeField] private float _knockBackDuration = 0.2f;
@@ -25,8 +25,8 @@ namespace Entity.Enemy
 		private float _moveSpeedWithVariation;
 
 		private GunBase _weapon;
-		private BasicStateMachine _stateMachine;
 		private Coroutine _knockback;
+		private BasicStateMachine _stateMachine;
 
 		private void Awake()
 		{
@@ -35,12 +35,23 @@ namespace Entity.Enemy
 			_characterController = GetComponent<CharacterController>();
 
 			_playerTransform = GameObject.FindWithTag("Player").transform;
+		}
+
+		private void Start()
+		{
 			_moveSpeedWithVariation = Mathf.Max(
 				0.5f,
 				_moveSpeedBase + Random.Range(-_moveSpeedVariationRange, _moveSpeedVariationRange)
 			);
 
+			_healthSystem.OnTakeDamage += HealthSystem_OnTakeDamage;
 			SetupStateMachine();
+		}
+
+		private void HealthSystem_OnTakeDamage(int heathPointsLeft)
+		{
+			if (heathPointsLeft <= 0)
+				Destroy(gameObject);
 		}
 
 		private void Update()
@@ -82,10 +93,10 @@ namespace Entity.Enemy
 			};
 
 			// Setup state machine behaviors
-			_stateMachine = new BasicStateMachine(sharedData);
+			_stateMachine = new BasicStateMachine(sharedData, this);
 			_stateMachine.AddState<AttackState>();
 			_stateMachine.AddState<GotHitState>();
-			_stateMachine.AddState<MovementState, MovementState.StateProps>(_movementProps);
+			_stateMachine.AddState<MovementState, MovementProps>(_movementProps);
 
 			_stateMachine.SetState<MovementState>();
 		}

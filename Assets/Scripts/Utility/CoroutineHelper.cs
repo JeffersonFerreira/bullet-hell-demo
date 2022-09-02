@@ -6,22 +6,27 @@ namespace Utility
 	public interface ICoroutineHelper
 	{
 		void StopCoroutine(Coroutine coroutine);
-		Coroutine StartCoroutine(IEnumerator enumerator);
+		Coroutine StartCoroutine(IEnumerator routine);
 	}
 
-	public class CoroutineHelper : MonoBehaviour, ICoroutineHelper
+	public class CoroutineHelper : ICoroutineHelper
 	{
-		private static CoroutineHelper _instance;
+		private readonly MonoBehaviour _wrapper;
 
-		public static ICoroutineHelper Instance
+		public CoroutineHelper(MonoBehaviour wrapper)
 		{
-			get
-			{
-				if (_instance == null) 
-					_instance = new GameObject("Coroutine Helper").AddComponent<CoroutineHelper>();
+			_wrapper = wrapper;
+		}
 
-				return _instance;
-			}
+
+		public Coroutine StartCoroutine(IEnumerator routine)
+		{
+			return _wrapper.StartCoroutine(routine);
+		}
+
+		public void StopCoroutine(Coroutine coroutine)
+		{
+			_wrapper.StopCoroutine(coroutine);
 		}
 	}
 }
