@@ -134,10 +134,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeedVariationRange: 1
-  _moveSpeedBase: 0.5
+  _moveSpeedBase: 1
   _movementProps:
-    ClosestDistance: 10
-    FarestDistance: 20
+    ClosestDistance: 5
+    FarestDistance: 10
   _knockBackDuration: 0.2
   _knockBackForce: 0.01
 --- !u!114 &754659209
@@ -152,8 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8529c0e533734045a801cdcefcdcce40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initialHealth: 3
-  _invulnerabilityDuration: 0.2
+  _initialHealth: 5
+  _invulnerabilityDuration: 0
 --- !u!1 &522718059734945640
 GameObject:
   m_ObjectHideFlags: 0

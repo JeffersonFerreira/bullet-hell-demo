@@ -120,7 +120,7 @@ Transform:
   - {fileID: 8774359469082017267}
   - {fileID: 4182611491923460339}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 120, z: 0}
 --- !u!33 &8774359469169925545
 MeshFilter:
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeedVariationRange: 1
-  _moveSpeedBase: 0.5
+  _moveSpeedBase: 1
   _movementProps:
     ClosestDistance: 2
     FarestDistance: 5
@@ -235,8 +235,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8529c0e533734045a801cdcefcdcce40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initialHealth: 3
-  _invulnerabilityDuration: 0.2
+  _initialHealth: 5
+  _invulnerabilityDuration: 0
 --- !u!1001 &6691233505365388301
 PrefabInstance:
   m_ObjectHideFlags: 0
