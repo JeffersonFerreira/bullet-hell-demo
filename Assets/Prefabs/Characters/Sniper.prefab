@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 522718059284203860}
   - component: {fileID: 754659208}
   - component: {fileID: 754659209}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sniper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,6 +138,8 @@ MonoBehaviour:
   _movementProps:
     ClosestDistance: 10
     FarestDistance: 20
+  _knockBackDuration: 0.2
+  _knockBackForce: 0.01
 --- !u!114 &754659209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,7 +165,7 @@ GameObject:
   - component: {fileID: 522718059734945639}
   - component: {fileID: 522718059734945637}
   - component: {fileID: 522718059734945638}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,6 +245,26 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 522718059284203856}
     m_Modifications:
+    - target: {fileID: 414969052008613865, guid: 0c70c8216edbe174e857b60d77ad29b8, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103948610014098407, guid: 0c70c8216edbe174e857b60d77ad29b8, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3113314552778418981, guid: 0c70c8216edbe174e857b60d77ad29b8, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565533637066166689, guid: 0c70c8216edbe174e857b60d77ad29b8, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844172839690272856, guid: 0c70c8216edbe174e857b60d77ad29b8, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7986537665115943274, guid: 0c70c8216edbe174e857b60d77ad29b8, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -290,6 +312,10 @@ PrefabInstance:
     - target: {fileID: 8573066462488205008, guid: 0c70c8216edbe174e857b60d77ad29b8, type: 3}
       propertyPath: m_Name
       value: Gun_Sniper
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573066462488205008, guid: 0c70c8216edbe174e857b60d77ad29b8, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

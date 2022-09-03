@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8774359469082017267}
   - component: {fileID: 8774359469082017265}
   - component: {fileID: 8774359469082017266}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 1080238019918604659}
   - component: {fileID: 210204828}
   - component: {fileID: 210204829}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Soldier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,6 +245,22 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 8774359469169925544}
     m_Modifications:
+    - target: {fileID: 990846895459670653, guid: 5a72ca1f513e70940a2016a6b98f58e7, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1526944823208849011, guid: 5a72ca1f513e70940a2016a6b98f58e7, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537427852761265841, guid: 5a72ca1f513e70940a2016a6b98f58e7, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6267063208313396684, guid: 5a72ca1f513e70940a2016a6b98f58e7, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7410558383267147006, guid: 5a72ca1f513e70940a2016a6b98f58e7, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -308,6 +324,10 @@ PrefabInstance:
     - target: {fileID: 9150136460442176324, guid: 5a72ca1f513e70940a2016a6b98f58e7, type: 3}
       propertyPath: m_Name
       value: Gun_Pistol
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150136460442176324, guid: 5a72ca1f513e70940a2016a6b98f58e7, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
