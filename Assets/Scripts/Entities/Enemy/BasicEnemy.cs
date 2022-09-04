@@ -48,9 +48,9 @@ namespace Entity.Enemy
 			SetupStateMachine();
 		}
 
-		private void HealthSystem_OnTakeDamage(int heathPointsLeft)
+		private void HealthSystem_OnTakeDamage(DamageData damageData)
 		{
-			if (heathPointsLeft <= 0)
+			if (damageData.CurrentHP <= 0)
 				Destroy(gameObject);
 		}
 

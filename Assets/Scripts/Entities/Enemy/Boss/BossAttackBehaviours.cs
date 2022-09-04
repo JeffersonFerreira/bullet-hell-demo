@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Entity.Enemy.Boss
 {
-	public class BossController : MonoBehaviour
+	public class BossAttackBehaviours : MonoBehaviour
 	{
 		[SerializeField] private Bullet _bossBullet;
 

@@ -259,7 +259,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3783063510405250833}
   - component: {fileID: 170499375944909949}
+  - component: {fileID: 1639956995265749399}
   - component: {fileID: 7134750842075773814}
+  - component: {fileID: 4411064401950409754}
   m_Layer: 7
   m_Name: Boss
   m_TagString: Untagged
@@ -292,7 +294,7 @@ Transform:
   - {fileID: 1851301137714875238}
   - {fileID: 4172848500468312968}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &170499375944909949
 BoxCollider:
@@ -307,6 +309,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 2.2013185, z: 1.5}
   m_Center: {x: 0, y: 0.60065925, z: 0}
+--- !u!114 &1639956995265749399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3783063510405250832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92e4494bb60844c8b19a7584b7397877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7134750842075773814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,6 +334,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bossBullet: {fileID: 7343663952246439008, guid: 0722c5a5aecaeb8499688bb19964c2a0, type: 3}
+--- !u!114 &4411064401950409754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3783063510405250832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8529c0e533734045a801cdcefcdcce40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _initialHealth: 1000
+  _invulnerabilityDuration: -1
 --- !u!1 &3783063510487139795
 GameObject:
   m_ObjectHideFlags: 0

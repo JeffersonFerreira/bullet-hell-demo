@@ -1,16 +1,16 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Entity
 {
-	public delegate void OnTakeDamage(int heathPointsLeft);
-
 	public class BaseHealthSystem : MonoBehaviour
 	{
 		[SerializeField] private int _initialHealth = 3;
 		[SerializeField] private float _invulnerabilityDuration = 0.2f;
 
-		public event OnTakeDamage OnTakeDamage;
+		public event Action<DamageData> OnTakeDamage;
 
+		public int InitialHealth => _initialHealth;
 		public int Health { get; private set; }
 
 		private float _lastDamageTime = float.NegativeInfinity;
@@ -24,15 +24,31 @@ namespace Entity
 		{
 			if (CanTakeDamage())
 			{
-				Health--;
+				Health = Mathf.Max(0, Health - 1);
 				_lastDamageTime = Time.time;
-				OnTakeDamage?.Invoke(Health);
+				OnTakeDamage?.Invoke(new DamageData(Health, _initialHealth));
 			}
 		}
 
 		public bool CanTakeDamage()
 		{
+			if (Health <= 0)
+				return false;
+
 			return Time.time > _lastDamageTime + _invulnerabilityDuration;
+		}
+	}
+
+	public readonly struct DamageData
+	{
+		public int CurrentHP { get; }
+		public int TotalHP { get; }
+		public float CurrentPercent => CurrentHP / (float) TotalHP;
+
+		public DamageData(int currentHp, int totalHp)
+		{
+			TotalHP = totalHp;
+			CurrentHP = currentHp;
 		}
 	}
 }
