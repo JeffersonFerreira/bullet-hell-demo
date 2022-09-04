@@ -5,20 +5,14 @@ using UnityEngine.UI;
 
 namespace UI
 {
-	public class BossHeathBar : MonoBehaviour
+	public class HeathBar : MonoBehaviour
 	{
 		[SerializeField] private Slider _slider;
-
-		private EnemyBoss _boss;
-
-		private void Awake()
-		{
-			_boss = FindObjectOfType<EnemyBoss>();
-		}
+		[SerializeField] private BaseHealthSystem _healthSystem;
 
 		private void Start()
 		{
-			_boss.HealthSystem.OnTakeDamage += HealthSystem_OnTakeDamage;
+			_healthSystem.OnTakeDamage += HealthSystem_OnTakeDamage;
 			_slider.value = 1;
 		}
 
