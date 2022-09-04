@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Guns;
 using UnityEngine;
 
 namespace Entity.Enemy
@@ -24,7 +25,7 @@ namespace Entity.Enemy
 
 			// TODO: Implement custom "enemy fire pattern"
 			if (Data.Gun != null)
-				Data.Gun.Fire();
+				Data.Gun.Fire(Target.Player);
 
 			yield return WaitLookingToPlayer(1f);
 

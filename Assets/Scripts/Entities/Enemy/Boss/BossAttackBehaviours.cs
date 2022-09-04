@@ -56,12 +56,7 @@ namespace Entity.Enemy.Boss
 		{
 			Bullet bullet = Instantiate(_bossBullet, pos, Quaternion.LookRotation(dir));
 
-			bullet.Apply(new BulletData {
-				Speed = speed,
-				Origin = pos,
-				SourceInstanceID = gameObject.GetInstanceID(),
-				Timeout = 10
-			});
+			bullet.Apply(new BulletData(speed: speed, origin: pos, timeout: 10, target: Target.Player));
 		}
 
 		private IEnumerator VolleyRoutine(int amount, float bulletSpeed)

@@ -18,7 +18,7 @@ namespace Entity.Player
 		private void Update()
 		{
 			if (Input.GetMouseButton(0))
-				ActiveGun.Fire();
+				ActiveGun.Fire(Target.Enemy);
 		}
 
 		public void NextGun()

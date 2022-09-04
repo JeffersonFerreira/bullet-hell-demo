@@ -8,9 +8,9 @@ namespace Guns
 
 		private bool _flag;
 
-		protected override void FireOnce()
+		protected override void FireOnce(Target target)
 		{
-			bool success = _flag ? _gunLeft.Fire() : _gunRight.Fire();
+			bool success = _flag ? _gunLeft.Fire(target) : _gunRight.Fire(target);
 
 			if (success)
 				_flag ^= true;

@@ -15,8 +15,8 @@ TagManager:
   - Enemy
   - Player
   - 
-  - 
-  - 
+  - Bullet to Player
+  - Bullet to Enemy
   - 
   - 
   - 

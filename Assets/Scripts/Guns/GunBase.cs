@@ -26,12 +26,12 @@ namespace Guns
 			IsFiring = false;
 		}
 
-		public bool Fire()
+		public bool Fire(Target target)
 		{
 			if (!CanFire())
 				return false;
 
-			StartCoroutine(FireRoutine());
+			StartCoroutine(FireRoutine(target));
 			return true;
 		}
 
@@ -40,13 +40,13 @@ namespace Guns
 			return !IsFiring && !IsCoolingDown;
 		}
 
-		private IEnumerator FireRoutine()
+		private IEnumerator FireRoutine(Target target)
 		{
 			IsFiring = true;
 
 			for (var i = 0; i < _roundsPerShot; i++)
 			{
-				FireOnce();
+				FireOnce(target);
 
 				if (_roundsPerShot > 1)
 					yield return new WaitForSeconds(_roundsDelay);
@@ -65,16 +65,11 @@ namespace Guns
 			IsFiring = false;
 		}
 
-		protected virtual void FireOnce()
+		protected virtual void FireOnce(Target target)
 		{
-			Bullet bullet = Instantiate(_bulletPrefab, _spawnPoint.position, transform.rotation);
-
-			bullet.Apply(new BulletData {
-				Speed = 20,
-				Timeout = 10,
-				Origin = _spawnPoint.position,
-				SourceInstanceID = gameObject.GetInstanceID()
-			});
+			Vector3 origin = _spawnPoint.position;
+			Bullet bullet = Instantiate(_bulletPrefab, origin, transform.rotation);
+			bullet.Apply(new BulletData(target, origin, 20, 10));
 		}
 	}
 }
