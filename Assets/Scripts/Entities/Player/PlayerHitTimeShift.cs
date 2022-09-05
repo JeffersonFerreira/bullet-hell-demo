@@ -34,6 +34,11 @@ namespace Entity.Player
 
 		private IEnumerator TimeShiftRoutine()
 		{
+			/*
+			 * Warning: Must use "fixedUnscaledDeltaTime" within this method.
+			 * "deltaTime" definitely will not work since it is timeScale dependant
+			 * and for some reason, "unscaledDeltaTime" also didn't (I don't know why)
+			 */
 			float vel = 0;
 
 			// Perform slowness
@@ -43,6 +48,7 @@ namespace Entity.Player
 				yield return null;
 			}
 
+			// Effect duration
 			float t = _duration;
 			while (t > 0)
 			{
