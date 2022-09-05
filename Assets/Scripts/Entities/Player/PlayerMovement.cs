@@ -17,13 +17,14 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] private float _maxSlowAmount = 0.7f;
 	[SerializeField] private float _slowDuration = 2f;
 
-	public event Action OnDash;
+	public event Action<DashData> OnDash;
 	public event Action OnSlowed;
 
 	private Camera _camera;
 	private CharacterController _characterController;
 
-	private bool _isDashing;
+	public bool IsDashing { get; private set; }
+
 	private float _slowAmount;
 	private float _lastSlowTime;
 	private float _lastDashTime;
@@ -39,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
 		UpdateRotation();
 		UpdateSlowEffectDecay();
 
-		if (!_isDashing)
+		if (!IsDashing)
 		{
 			UpdateMovement();
 
@@ -83,11 +84,12 @@ public class PlayerMovement : MonoBehaviour
 
 	private IEnumerator DashRoutine()
 	{
-		_isDashing = true;
+		IsDashing = true;
 
-		OnDash?.Invoke();
 		float t = _dashDuration;
 		Vector3 moveDir = _characterController.velocity.normalized;
+
+		OnDash?.Invoke(new DashData(transform.position, moveDir, DashState.Began));
 
 		while ((t -= Time.deltaTime) > 0)
 		{
@@ -96,6 +98,28 @@ public class PlayerMovement : MonoBehaviour
 		}
 
 		_lastDashTime = Time.time;
-		_isDashing = false;
+		IsDashing = false;
+
+		OnDash?.Invoke(new DashData(transform.position, moveDir, DashState.Completed));
 	}
+}
+
+public readonly struct DashData
+{
+	public Vector3 Point { get; }
+	public Vector3 Direction { get; }
+	public DashState State { get; }
+
+	public DashData(Vector3 point, Vector3 direction, DashState state)
+	{
+		Point = point;
+		Direction = direction;
+		State = state;
+	}
+}
+
+public enum DashState
+{
+	Began,
+	Completed
 }

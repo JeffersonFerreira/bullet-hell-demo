@@ -15,6 +15,8 @@ namespace Entity
 
 		private float _lastDamageTime = float.NegativeInfinity;
 
+		public bool IsInvulnerable { get; private set; }
+
 		private void Awake()
 		{
 			Health = _initialHealth;
@@ -32,10 +34,20 @@ namespace Entity
 
 		public bool CanTakeDamage()
 		{
-			if (Health <= 0)
+			if (IsInvulnerable || Health <= 0)
 				return false;
 
 			return Time.time > _lastDamageTime + _invulnerabilityDuration;
+		}
+
+		public void GrantInvulnerability()
+		{
+			IsInvulnerable = true;
+		}
+
+		public void RevokeInvulnerability()
+		{
+			IsInvulnerable = false;
 		}
 	}
 
