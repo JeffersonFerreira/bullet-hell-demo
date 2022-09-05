@@ -27,6 +27,9 @@ namespace UI
 
 		private void Start()
 		{
+			// No need to fry your compute with unlimited FPS
+			Application.targetFrameRate = 60;
+
 			foreach (Button button in _playAgainButtons)
 				button.onClick.AddListener(OnClickPlayAgain);
 
@@ -40,11 +43,11 @@ namespace UI
 				return;
 
 			GameEnd(winner);
-			_playerHeath.GrantInvulnerability();
 		}
 
 		private void OnClickPlayAgain()
 		{
+			Time.timeScale = 1;
 			SceneManager.LoadScene("MainScene");
 		}
 
@@ -54,6 +57,7 @@ namespace UI
 
 			Time.timeScale = 0;
 			showView.SetActive(true);
+			_playerHeath.GrantInvulnerability();
 		}
 	}
 }
