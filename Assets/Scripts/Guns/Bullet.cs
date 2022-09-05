@@ -12,7 +12,6 @@ namespace Guns
 		public BulletData Data { get; private set; }
 
 		private Rigidbody _rigidbody;
-		private TrailRenderer _trailRenderer;
 
 		private const int LAYER_HIT_ENEMY = 11;
 		private const int LAYER_HIT_PLAYER = 10;
@@ -20,7 +19,6 @@ namespace Guns
 		private void Awake()
 		{
 			_rigidbody = GetComponent<Rigidbody>();
-			_trailRenderer = GetComponentInChildren<TrailRenderer>();
 		}
 
 		public void Apply(BulletData data)
@@ -48,20 +46,14 @@ namespace Guns
 				case BulletHitEffect.Damage:
 				{
 					if (collision.gameObject.TryGetComponent(out BaseHealthSystem healthSystem))
-					{
 						healthSystem.TakeDamage();
-						_trailRenderer.enabled = false;
-					}
 
 					break;
 				}
 				case BulletHitEffect.Slowness:
 				{
 					if (collision.gameObject.TryGetComponent(out PlayerMovement movement))
-					{
 						movement.ApplySlowness();
-						Dispose();
-					}
 
 					break;
 				}
