@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using Entity.Player;
 using Guns;
 using UnityEngine;
 
@@ -33,8 +33,7 @@ namespace Entity.Enemy
 			_weapon = GetComponentInChildren<GunBase>();
 			_healthSystem = GetComponent<BaseHealthSystem>();
 			_characterController = GetComponent<CharacterController>();
-
-			_playerTransform = GameObject.FindWithTag("Player").transform;
+			_playerTransform = FindObjectOfType<PlayerController>().transform;
 		}
 
 		private void Start()

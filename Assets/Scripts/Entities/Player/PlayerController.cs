@@ -2,7 +2,7 @@
 
 namespace Entity.Player
 {
-	public class Player : MonoBehaviour
+	public class PlayerController : MonoBehaviour
 	{
 		private PlayerMovement _movement;
 		private BaseHealthSystem _healthSystem;

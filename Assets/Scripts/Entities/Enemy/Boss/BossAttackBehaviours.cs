@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Entity.Player;
 using Guns;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ namespace Entity.Enemy.Boss
 
 		private void Awake()
 		{
-			_playerTransform = GameObject.FindWithTag("Player").transform;
+			_playerTransform = FindObjectOfType<PlayerController>().transform;
 		}
 
 		private IEnumerator Start()
